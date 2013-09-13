@@ -19,9 +19,11 @@ int main(int argc, char* argv[])
         std::thread t(boost::bind(&simpletsdb::SimpleTSDBClient::run, &client));
 
         // feed some data points
+        simpletsdb::SimpleTSDBClient::TagsType tags;
+        tags["foo"] = "bar";
         for(int i = 0; i < 30; i++)
         {
-            client.add_point("testmetric", i, 555, NULL);
+            client.add_point("testmetric", i, 555, &tags);
             sleep(1);
         }
 

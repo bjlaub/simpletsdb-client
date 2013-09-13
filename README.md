@@ -6,13 +6,15 @@ This is a dead-simple C++ telnet-style client for OpenTSDB, using Boost.Asio.
 The client is self-contained in a single class (see SimpleTSDBClient.hh). Typical
 usage is as follows
 
-    SimpleTSDBClient client(host, port);
+    simpletsdb::SimpleTSDBClient client(host, port);
 
     // call client.run() in a separate thread
-    std::thread t(boost::bind(&SimpleTSDBClient::run, &client));
+    std::thread t(
+        boost::bind(
+            &simpletsdb::SimpleTSDBClient::run, &client));
 
     // feed some data points to the tsd
-    SimpleTSDBClient::TagsType tags;
+    simpletsdb::SimpleTSDBClient::TagsType tags;
     tags["foo"] = "bar";
     tags["bar"] = "baz";
     client.add_point("my_metric", timestamp, 123.456, &tags);
