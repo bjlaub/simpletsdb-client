@@ -1,5 +1,6 @@
 #include <iostream>
 #include <thread>
+#include <cstdlib>
 #include <boost/asio.hpp>
 
 #include "SimpleTSDBClient.hh"
@@ -13,7 +14,7 @@ int main(int argc, char* argv[])
             std::cerr << "Usage: chat_client <host> <port>\n";
             return 1;
         }
-        simpletsdb::SimpleTSDBClient client("localhost", 12345);
+        simpletsdb::SimpleTSDBClient client(argv[1], atoi(argv[2]));
 
         // start the client
         std::thread t(boost::bind(&simpletsdb::SimpleTSDBClient::run, &client));

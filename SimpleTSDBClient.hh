@@ -152,7 +152,7 @@ private:
         }
         else
         {
-            std::cout << "not connected...\n";
+            std::cout << "not connected: " << error << "\n";
             m_reconnect_timer.expires_from_now(boost::posix_time::seconds(2));
             m_reconnect_timer.async_wait(
                 boost::bind(&SimpleTSDBClient::restart_connect, this,
